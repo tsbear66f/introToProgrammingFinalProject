@@ -8,7 +8,7 @@ This project can be distributed freely, and can also be used for, in general, mo
 
 
 
-**Dependencies: **
+**Dependencies:**
 The only dependency is pygame, simply install it and run!
 
 

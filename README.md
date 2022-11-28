@@ -1,10 +1,11 @@
-# introToProgrammingFinalProject
+# introToProgrammingFinalProjec
+
 
 **Project Title:** Intro to Programming Final Project - avoid the asteroid
  
  
 **Description:**
-This project can be distributed freely, and can also be used for, in general, most non-commercial activities. It is a game about avoiding as many asteroids as possible without having your hp dip to 0. 
+This project can be distributed freely, and can also be used for, in general, most non-commercial activities. It is a game about avoiding as many asteroids as possible without having your hp dip to 0. NOTE-IT IS NOT WORKING RIGHT NOW BECAUSE BULLETS ARE TRYING TO BE IMPLEMENTED TO THE GAME. 
 
 
 

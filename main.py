@@ -4,7 +4,7 @@
 # Samuel Lin (for telling me how to make enemies that fall down respawn)
 
 
-# import libraries and modules
+# imports libraries and modules
 # from platform import platform
 from multiprocessing.resource_sharer import stop
 import pygame as pg

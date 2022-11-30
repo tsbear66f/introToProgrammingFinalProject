@@ -260,8 +260,10 @@ while running:
         pg.quit
         stop
 
-    if int(SCORE) >=10:
+    if int(SCORE) >= 100:
         draw_text("YOU WON!", 40, BLUE, WIDTH / 2, HEIGHT / 3)
+        pg.quit
+        stop
     # buffer - after drawing everything, flip display
     pg.display.flip()
 

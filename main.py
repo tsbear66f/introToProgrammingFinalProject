@@ -174,7 +174,7 @@ for i in range(30):
     all_sprites.add(m)
     mobs.add(m)
     print(m)
-
+print(mobs)
 
 all_sprites.update()
 all_sprites.draw(screen)
@@ -192,19 +192,13 @@ while running:
     # keep the loop running using clock
     clock.tick(FPS)
 
-start_ticks = pg.time.get_ticks()
-running = True
-while running:
-    # keep the loop running using clock
-    clock.tick(FPS)
-
     hits = pg.sprite.spritecollide(player, all_plats, False)
     if hits:
         # print("ive struck a plat")
         player.pos.y = hits[0].rect.top
         player.vel.y = 0
     
-    pewpewhits = pg.sprite.groupcollide(Pewpew, mobs, True, True)
+    pewpewhits = pg.sprite.groupcollide(pewpews, mobs, True, True)
 
 # makes it if the sprite hits 20 asteroids, it "dies"
     mobhits = pg.sprite.spritecollide(player, mobs, True)
@@ -217,7 +211,7 @@ while running:
         if event.type == pg.QUIT:
             running = False
         # check for mouse
-        if event.type == pg.K_m:
+        if event.type == pg.MOUSEBUTTONUP:
             p = Pewpew(player.rect.midtop[0], player.rect.midtop[1], 10, 10)
             p.owner = "player"
             all_sprites.add(p)
@@ -230,7 +224,7 @@ while running:
                 if m.rect.collidepoint(mpos):
                     print(m)
                     m.kill()
-                    SCORE += 1
+                    SCORE += 10
     if player.health == 0:
         draw_text == "you died"
         draw_text == "your final score was:"
@@ -257,12 +251,17 @@ while running:
     # draw all sprites
     all_sprites.draw(screen)
 
+    draw_text("POINTS: " + str(SCORE), 22, WHITE, WIDTH / 2, HEIGHT / 24)
+    draw_text("HEALTH: " + str(player.health), 22, WHITE, WIDTH / 2, HEIGHT / 10)
+
     # death screen that stays hidden until the health is 0 or less
     if player.health <= 0:
         draw_text("YOU HAVE DIED", 40, RED, WIDTH / 2, HEIGHT / 10)
         pg.quit
         stop
 
+    if int(SCORE) >=10:
+        draw_text("YOU WON!", 40, BLUE, WIDTH / 2, HEIGHT / 3)
     # buffer - after drawing everything, flip display
     pg.display.flip()
 

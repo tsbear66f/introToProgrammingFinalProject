@@ -1,5 +1,5 @@
 # http://kidscancode.org/blog/
-# stackoverflow.com(specifically looking for how to constantly   spawn enemies, still looking for something that works though)
+# stackoverflow.com(specifically looking for how to constantly spawn enemies, still looking for something that works though)
 # Mr. Cozort (for the main/game base files)
 # Samuel Lin (for telling me how to make enemies that fall down respawn)
 

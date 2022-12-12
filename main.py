@@ -98,7 +98,7 @@ class Bullet(pg.sprite.Sprite):
         super().__init__()
  
         self.image = pg.Surface([4, 10])
-        self.image.fill(BLACK)
+        self.image.fill(WHITE)
  
         self.rect = self.image.get_rect()
  
@@ -194,7 +194,11 @@ while running:
         player.pos.y = hits[0].rect.top
         player.vel.y = 0
         
-    elif event.type == pg.MOUSEBUTTONDOWN:
+    for event in pg.event.get():
+        if event.type == pg.QUIT:
+            done = True
+ 
+        elif event.type == pg.MOUSEBUTTONDOWN:
             # Fire a bullet if the user clicks the mouse button
             bullet = Bullet()
             # Set the bullet so it is where the player is
@@ -203,6 +207,7 @@ while running:
             # Add the bullet to the lists
             all_sprites.add(bullet)
             bullet_list.add(bullet)
+ 
  
     
 # makes it if the sprite hits 20 asteroids, it "dies"

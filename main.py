@@ -68,12 +68,7 @@ class Player(Sprite):
             self.acc.y = 2.5
         if keys[pg.K_d]:
             self.acc.x = 2.5
-    def jump(self):
-        self.rect.x += 1
-        hits = pg.sprite.spritecollide(self, all_plats, False)
-        self.rect.x += -1
-        if hits:
-            self.vel.y = -20
+
     def update(self):
         self.acc = vec(0,PLAYER_GRAV)
         self.controls()

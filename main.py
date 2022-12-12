@@ -96,40 +96,33 @@ class Player(Sprite):
         if self.rect.bottom >= 750:
             self.rect.bottom = 750
 
-class Pewpew(Sprite):
-    def __init__(self, x, y, w, h):
-        Sprite.__init__(self)
-        self.image = pg.Surface((w, h))
-        self.image.fill(GREEN)
+class Bullet(pg.sprite.Sprite):
+    """ This class represents the bullet . """
+    def __init__(self):
+        # Call the parent class (Sprite) constructor
+        super().__init__()
+ 
+        self.image = pg.Surface([4, 10])
+        self.image.fill(BLACK)
+ 
         self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-        self.speed = 20
-        self.owner = ""
+ 
     def update(self):
-        if self.owner == "player":
-            self.rect.y -= self.speed
-        else:
-            self.rect.y += self.speed
-        if (self.rect.y < 0):
-            self.kill()
-            print(pewpews)
+        """ Move the bullet. """
+        self.rect.y -= 10
+ 
 
 
-# creates the class Mobs under sprites. 
-class Mob(Sprite):
-    def __init__(self, x, y, w, h, color):
-        Sprite.__init__(self)
-        self.image = pg.Surface((w, h))
-        self.color = color
+class Block(pg.sprite.Sprite):
+    """ This class represents the block. """
+    def __init__(self, color):
+        # Call the parent class (Sprite) constructor
+        super().__init__()
+ 
+        self.image = pg.Surface([30, 30])
         self.image.fill(color)
+ 
         self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-    def update(self):
-        self.rect.y += 3
-        if self.rect.y > HEIGHT:
-            self.rect.y = 0
 
 
 
@@ -162,19 +155,27 @@ all_sprites = pg.sprite.Group()
 all_plats = pg.sprite.Group()
 mobs = pg.sprite.Group()
 pewpews = pg.sprite.Group()
-
+# List of each block in the game
+block_list = pg.sprite.Group()
 # instantiate classes
 player = Player()
+# List of each bullet
+bullet_list = pg.sprite.Group()
 
 
 # spawns in mobs
 
-for i in range(30):
-    m = Mob(randint(0,WIDTH), randint(0,HEIGHT), 100, 100, (255, 255, 255))
-    all_sprites.add(m)
-    mobs.add(m)
-    print(m)
-print(mobs)
+for i in range(50):
+    # This represents a block
+    block = Block(BLUE)
+ 
+    # Set a random location for the block
+    block.rect.x = random.randrange(WIDTH)
+    block.rect.y = random.randrange(350)
+ 
+    # Add the block to the list of objects
+    block_list.add(block)
+    all_sprites.add(block)
 
 all_sprites.update()
 all_sprites.draw(screen)
@@ -197,11 +198,20 @@ while running:
         # print("ive struck a plat")
         player.pos.y = hits[0].rect.top
         player.vel.y = 0
+        
+    elif event.type == pg.MOUSEBUTTONDOWN:
+            # Fire a bullet if the user clicks the mouse button
+            bullet = Bullet()
+            # Set the bullet so it is where the player is
+            bullet.rect.x = player.rect.x
+            bullet.rect.y = player.rect.y
+            # Add the bullet to the lists
+            all_sprites.add(bullet)
+            bullet_list.add(bullet)
+ 
     
-    pewpewhits = pg.sprite.groupcollide(pewpews, mobs, True, True)
-
 # makes it if the sprite hits 20 asteroids, it "dies"
-    mobhits = pg.sprite.spritecollide(player, mobs, True)
+    mobhits = pg.sprite.spritecollide(player, block_list, True)
     if mobhits:
         print("ive struck an asteroid")
         player.health -= 20
@@ -211,20 +221,7 @@ while running:
         if event.type == pg.QUIT:
             running = False
         # check for mouse
-        if event.type == pg.MOUSEBUTTONUP:
-            p = Pewpew(player.rect.midtop[0], player.rect.midtop[1], 10, 10)
-            p.owner = "player"
-            all_sprites.add(p)
-            pewpews.add(p)
-            mpos = pg.mouse.get_pos()
-            print(mpos)
-            # get a list of all sprites that are under the mouse cursor
-            clicked_sprites = [s for s in mobs if s.rect.collidepoint(mpos)]
-            for m in mobs:
-                if m.rect.collidepoint(mpos):
-                    print(m)
-                    m.kill()
-                    SCORE += 10
+
     if player.health == 0:
         draw_text == "you died"
         draw_text == "your final score was:"

@@ -207,7 +207,23 @@ while running:
             # Add the bullet to the lists
             all_sprites.add(bullet)
             bullet_list.add(bullet)
+     # Calculate mechanics for each bullet
+    for bullet in bullet_list:
  
+        # See if it hit a block
+        block_hit_list = pg.sprite.spritecollide(bullet, block_list, True)
+ 
+        # For each block hit, remove the bullet and add to the score
+        for block in block_hit_list:
+            bullet_list.remove(bullet)
+            all_sprites.remove(bullet)
+            SCORE += 1
+            print(SCORE)
+ 
+        # Remove the bullet if it flies up off the screen
+        if bullet.rect.y < -10:
+            bullet_list.remove(bullet)
+            all_sprites.remove(bullet)
  
     
 # makes it if the sprite hits 20 asteroids, it "dies"

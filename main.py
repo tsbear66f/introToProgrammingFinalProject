@@ -11,7 +11,8 @@ import pygame as pg
 from pygame.sprite import Sprite
 import random
 from random import randint
-
+from pygame import mixer
+pg.mixer.init
 vec = pg.math.Vector2
 
 # game settings 
@@ -125,12 +126,11 @@ class Block(pg.sprite.Sprite):
         if self.rect.y > HEIGHT:
             self.rect.y = 0
         if SCORE >= 100:
-            self.rect.y += 9
+            self.rect.y += 3
         if SCORE >= 200:
-            self.rect.y += 15
+            self.rect.y += 5
         if SCORE >= 300:
-            self.rect.y += 21
-
+            self.rect.y += 7
 
 
 
@@ -288,6 +288,8 @@ while running:
 
     if int(SCORE) >= 500:
         draw_text("YOU WON!", 40, BLUE, WIDTH / 2, HEIGHT / 3)
+    if int(SCORE) == 100:
+        draw_text("THE ASTEROIDS HAVE PICKED UP SPEED", 20, RED, WIDTH / 2, HEIGHT / 5)
         pg.quit
         stop
     # buffer - after drawing everything, flip display

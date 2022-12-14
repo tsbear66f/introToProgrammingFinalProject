@@ -118,6 +118,11 @@ class Block(pg.sprite.Sprite):
         self.image.fill(color)
  
         self.rect = self.image.get_rect()
+    def update(self):
+        self.rect.y += 3
+        if self.rect.y > HEIGHT:
+            self.rect.y = 0
+
 
 
 
@@ -149,7 +154,6 @@ clock = pg.time.Clock()
 all_sprites = pg.sprite.Group()
 all_plats = pg.sprite.Group()
 mobs = pg.sprite.Group()
-pewpews = pg.sprite.Group()
 # List of each block in the game
 block_list = pg.sprite.Group()
 # instantiate classes
@@ -166,7 +170,7 @@ for i in range(50):
  
     # Set a random location for the block
     block.rect.x = random.randrange(WIDTH)
-    block.rect.y = random.randrange(350)
+    block.rect.y = random.randrange(750)
  
     # Add the block to the list of objects
     block_list.add(block)
@@ -217,7 +221,7 @@ while running:
         for block in block_hit_list:
             bullet_list.remove(bullet)
             all_sprites.remove(bullet)
-            SCORE += 1
+            SCORE += 10
             print(SCORE)
  
         # Remove the bullet if it flies up off the screen

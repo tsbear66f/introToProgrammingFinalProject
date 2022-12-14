@@ -90,6 +90,8 @@ class Player(Sprite):
             self.rect.top = 0
         if self.rect.bottom >= 750:
             self.rect.bottom = 750
+        if SCORE >= 100:
+            self.vel.y += 1.75
 
 class Bullet(pg.sprite.Sprite):
     """ This class represents the bullet . """
@@ -104,7 +106,7 @@ class Bullet(pg.sprite.Sprite):
  
     def update(self):
         """ Move the bullet. """
-        self.rect.y -= 10
+        self.rect.y -= 15
  
 
 
@@ -122,6 +124,12 @@ class Block(pg.sprite.Sprite):
         self.rect.y += 3
         if self.rect.y > HEIGHT:
             self.rect.y = 0
+        if SCORE >= 100:
+            self.rect.y += 9
+        if SCORE >= 200:
+            self.rect.y += 15
+        if SCORE >= 300:
+            self.rect.y += 21
 
 
 
@@ -265,11 +273,12 @@ while running:
     # Player Health screen that stops showing if the health is 0 or less
     if player.health > 0:
         draw_text("HEALTH: " + str(player.health), 22, WHITE, WIDTH / 2, HEIGHT / 10)
+        draw_text("POINTS: " + str(SCORE), 22, WHITE, WIDTH / 2, HEIGHT / 24)
+
     # draw all sprites
     all_sprites.draw(screen)
 
-    draw_text("POINTS: " + str(SCORE), 22, WHITE, WIDTH / 2, HEIGHT / 24)
-    draw_text("HEALTH: " + str(player.health), 22, WHITE, WIDTH / 2, HEIGHT / 10)
+ 
 
     # death screen that stays hidden until the health is 0 or less
     if player.health <= 0:
@@ -277,7 +286,7 @@ while running:
         pg.quit
         stop
 
-    if int(SCORE) >= 100:
+    if int(SCORE) >= 500:
         draw_text("YOU WON!", 40, BLUE, WIDTH / 2, HEIGHT / 3)
         pg.quit
         stop

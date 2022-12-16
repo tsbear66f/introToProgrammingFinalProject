@@ -7,7 +7,6 @@
 **Description:**
 This project can be distributed freely, and can also be used for, in general, most non-commercial activities. It is a game about avoiding as many asteroids as possible without having your hp dip to 0. 
 
-**CODE IS WORKING AGAIN, BULLETS HAVE BEEN ADDED**
 
 
 **Dependencies:**
@@ -49,3 +48,6 @@ Thanks to Sam for helping me with constant mob spawns.
 
 w3Schools
 PyGame
+pixabay
+cloudconverter
+stackoverflow

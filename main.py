@@ -2,10 +2,10 @@
 # stackoverflow.com(specifically looking for how to constantly   spawn enemies, still looking for something that works though)
 # Mr. Cozort (for the main/game base files)
 # Samuel Lin (for telling me how to make enemies that fall down respawn)
-
+# pixabay.com for the sounds
+# cloud convert for the sounds
 
 # imports libraries and modules
-# from platform import platform
 import os
 from multiprocessing.resource_sharer import stop
 import pygame as pg
@@ -14,18 +14,25 @@ import random
 from random import randint
 from pygame import mixer
 
+# these two lines of code allow us to access our sounds folder so you can hear things!
+# realistically in space, you wouldn't be able to hear anything, but this is a video game!
 Path = "C:\github\BCPProgrammingClass\introToProgrammingFinalProject\sounds"
 os.chdir(Path)
 
+# this initializes pygame's sound function - neat
 pg.mixer.init()
+
+# this is so that we can find the mouse and bullet locations
 vec = pg.math.Vector2
 
 
 #sounds & music
-
+#this part loads the 80's techno soundtrack
 mixer.music.load('music.wav')
 mixer.music.set_volume(0.2)
 mixer.music.play()
+
+#this part defines, calls, and loads all the sounds
 laser = mixer.Sound('laser.wav')
 health = mixer.Sound('health.wav')
 beep = mixer.Sound('beep.wav')
@@ -76,6 +83,7 @@ class Player(Sprite):
         self.vel = vec(0,0)
         self.acc = vec(0,0)
         self.health = 100
+#controls
     def controls(self):
         keys = pg.key.get_pressed()
         if keys[pg.K_w]:
@@ -87,6 +95,7 @@ class Player(Sprite):
         if keys[pg.K_d]:
             self.acc.x = 2.5
 
+# updating your own sprite and changing friction
     def update(self):
         self.acc = vec(0,PLAYER_GRAV)
         self.controls()
@@ -111,10 +120,11 @@ class Player(Sprite):
         if SCORE >= 100:
             self.vel.y += 1.75
 
+# makes bullets
+
 class Bullet(pg.sprite.Sprite):
-    """ This class represents the bullet . """
     def __init__(self):
-        # Call the parent class (Sprite) constructor
+        # Call the parent class (Sprite) 
         super().__init__()
  
         self.image = pg.Surface([4, 10])
@@ -127,9 +137,10 @@ class Bullet(pg.sprite.Sprite):
         self.rect.y -= 15
  
 
+# creates blocks
 
 class Block(pg.sprite.Sprite):
-    """ This class represents the block. """
+
     def __init__(self, color):
         # Call the parent class (Sprite) constructor
         super().__init__()
@@ -193,14 +204,15 @@ for i in range(50):
     # This represents a block
     block = Block(BLUE)
  
-    # Set a random location for the block
-    block.rect.x = random.randrange(WIDTH)
+    # Set a random location for the block, but also limits it so they don't go half off screen
+    block.rect.x = random.randrange(0,975)
     block.rect.y = random.randrange(750)
  
     # Add the block to the list of objects
     block_list.add(block)
     all_sprites.add(block)
 
+#updates so that you can see the sprites
 all_sprites.update()
 all_sprites.draw(screen)
 
@@ -216,7 +228,7 @@ running = True
 while running:
     # keep the loop running using clock
     clock.tick(FPS)
-
+    #this part limits where the player can go
     hits = pg.sprite.spritecollide(player, all_plats, False)
     if hits:
         # print("ive struck a plat")
@@ -226,7 +238,7 @@ while running:
     for event in pg.event.get():
         if event.type == pg.QUIT:
             done = True
- 
+        #this is where bullets are made - Yay
         elif event.type == pg.MOUSEBUTTONDOWN:
             # Fire a bullet if the user clicks the mouse button
             bullet = Bullet()
@@ -237,6 +249,7 @@ while running:
             all_sprites.add(bullet)
             bullet_list.add(bullet)
             laser.play()
+            
      # Calculate mechanics for each bullet
     for bullet in bullet_list:
  
@@ -271,7 +284,7 @@ while running:
             running = False
         # check for mouse
     
-
+# creates a death screen
     if player.health == 0:
         draw_text == "you died"
         draw_text == "your final score was:"
@@ -308,6 +321,7 @@ while running:
         pg.quit
         stop
 
+    # this part makes it so that the more asteroids you shoot, the faster they go! this is also where you get an end screen!
     if int(SCORE) >= 500:
         draw_text("PERFECT SCORE - YOU WON!", 40, BLUE, WIDTH / 2, HEIGHT / 3)
     if int(SCORE) == 100:

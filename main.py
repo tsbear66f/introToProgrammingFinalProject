@@ -6,14 +6,31 @@
 
 # imports libraries and modules
 # from platform import platform
+import os
 from multiprocessing.resource_sharer import stop
 import pygame as pg
 from pygame.sprite import Sprite
 import random
 from random import randint
 from pygame import mixer
-pg.mixer.init
+
+Path = "C:\github\BCPProgrammingClass\introToProgrammingFinalProject\sounds"
+os.chdir(Path)
+
+pg.mixer.init()
 vec = pg.math.Vector2
+
+
+#sounds & music
+
+mixer.music.load('music.wav')
+mixer.music.set_volume(0.2)
+mixer.music.play()
+laser = mixer.Sound('laser.wav')
+health = mixer.Sound('health.wav')
+beep = mixer.Sound('beep.wav')
+explosion = mixer.Sound('explosion.wav')
+crash = mixer.Sound('crash.wav')
 
 # game settings 
 WIDTH = 1000
@@ -219,6 +236,7 @@ while running:
             # Add the bullet to the lists
             all_sprites.add(bullet)
             bullet_list.add(bullet)
+            laser.play()
      # Calculate mechanics for each bullet
     for bullet in bullet_list:
  
@@ -231,6 +249,7 @@ while running:
             all_sprites.remove(bullet)
             SCORE += 10
             print(SCORE)
+            crash.play()
  
         # Remove the bullet if it flies up off the screen
         if bullet.rect.y < -10:
@@ -243,12 +262,15 @@ while running:
     if mobhits:
         print("ive struck an asteroid")
         player.health -= 20
+        explosion.play()
+
 
     for event in pg.event.get():
         # check for closed window
         if event.type == pg.QUIT:
             running = False
         # check for mouse
+    
 
     if player.health == 0:
         draw_text == "you died"
@@ -287,11 +309,10 @@ while running:
         stop
 
     if int(SCORE) >= 500:
-        draw_text("YOU WON!", 40, BLUE, WIDTH / 2, HEIGHT / 3)
+        draw_text("PERFECT SCORE - YOU WON!", 40, BLUE, WIDTH / 2, HEIGHT / 3)
     if int(SCORE) == 100:
         draw_text("THE ASTEROIDS HAVE PICKED UP SPEED", 20, RED, WIDTH / 2, HEIGHT / 5)
-        pg.quit
-        stop
+    
     # buffer - after drawing everything, flip display
     pg.display.flip()
 

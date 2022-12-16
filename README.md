@@ -11,6 +11,7 @@ This project can be distributed freely, and can also be used for, in general, mo
 
 **Dependencies:**
 The only dependency is pygame, simply install it and run!
+if you want sound, make sure the "sound" folder is downloaded as well!
 
 
 **Installing:**

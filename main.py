@@ -16,6 +16,7 @@ from pygame import mixer
 
 # these two lines of code allow us to access our sounds folder so you can hear things!
 # realistically in space, you wouldn't be able to hear anything, but this is a video game!
+# if you want sound, change the Path to your own file path
 Path = "C:\github\BCPProgrammingClass\introToProgrammingFinalProject\sounds"
 os.chdir(Path)
 

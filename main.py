@@ -13,6 +13,7 @@ from pygame.sprite import Sprite
 import random
 from random import randint
 from pygame import mixer
+from colors import*
 
 # these two lines of code allow us to access our sounds folder so you can hear things!
 # realistically in space, you wouldn't be able to hear anything, but this is a video game!
@@ -51,12 +52,6 @@ PLAYER_GRAV = 0
 PLAYER_FRIC = 6
 SCORE = 0
 
-# define colors
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
 
 
 # allows for text to actually be displayed on screen

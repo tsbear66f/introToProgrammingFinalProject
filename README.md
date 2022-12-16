@@ -7,11 +7,11 @@
 **Description:**
 This project can be distributed freely, and can also be used for, in general, most non-commercial activities. It is a game about avoiding as many asteroids as possible without having your hp dip to 0. 
 
-**CODE IS WORKING AGAIN, BULLETS HAVE BEEN ADDED**
 
 
 **Dependencies:**
-The only dependency is pygame, simply install it and run!
+The only dependency is pygame and python, simply install it and run!
+if you want sound, make sure the "sound" folder is downloaded as well, and change the current path to your own path to the sound folder
 
 
 **Installing:**
@@ -49,3 +49,6 @@ Thanks to Sam for helping me with constant mob spawns.
 
 w3Schools
 PyGame
+pixabay
+cloudconverter
+stackoverflow
